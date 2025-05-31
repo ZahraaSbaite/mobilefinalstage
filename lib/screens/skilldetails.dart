@@ -5,6 +5,7 @@ import 'package:final_project/widgets/addbottom.dart';
 import 'package:final_project/widgets/editskill.dart';
 import 'package:final_project/widgets/favoritebottom.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SkillDetailsScreen extends StatefulWidget {
   final Course course;
@@ -86,10 +87,11 @@ class _SkillDetailsScreenState extends State<SkillDetailsScreen> {
   }
 
   String _formatDateRange(Skill skill) {
-    String start =
-        skill.startDate.toLocal().toIso8601String().split('T').first;
-    String end =
-        skill.endDate.toLocal().toIso8601String().split('T').first;
+    final formatter = DateFormat(
+      'MMM dd, yyyy',
+    );
+    String start = formatter.format(skill.startDate.toLocal());
+    String end = formatter.format(skill.endDate.toLocal());
     return "$start - $end";
   }
 
@@ -216,7 +218,7 @@ class _SkillDetailsScreenState extends State<SkillDetailsScreen> {
       floatingActionButton: AddButton(
         onPressed: _showAddSkillDialog,
         backgroundColor: const Color(0xFF202D5A),
-        iconColor: Color.fromARGB(255, 203, 199, 193),
+        iconColor: const Color.fromARGB(255, 203, 199, 193),
         tooltip: 'Add new skill',
       ),
     );

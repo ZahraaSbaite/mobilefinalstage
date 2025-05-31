@@ -1,6 +1,6 @@
 import 'package:final_project/models/skill.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 
 class AddSkillScreen extends StatefulWidget {
   const AddSkillScreen({super.key});
@@ -82,7 +82,7 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
 
   String _formatDate(DateTime? date) {
     if (date == null) return "";
-    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+    return DateFormat('MMM dd, yyyy').format(date);
   }
 
   @override
@@ -105,20 +105,34 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: "Skill Name",
-                labelStyle: TextStyle(color: Color(0xFF202D5A)),
+                labelStyle: const TextStyle(color: Color(0xFF202D5A)),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                ),
               ),
+              style: const TextStyle(color: Color(0xFF202D5A)),
               autofocus: true,
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _descriptionController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: "Description",
-                labelStyle: TextStyle(color: Color(0xFF202D5A)),
+                labelStyle: const TextStyle(color: Color(0xFF202D5A)),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                ),
               ),
               maxLines: 1,
+              style: const TextStyle(color: Color(0xFF202D5A)),
             ),
             const SizedBox(height: 16),
             Row(
@@ -136,7 +150,7 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
                         Text(
                           _startDate == null
                               ? "Pick Start Date"
-                              : "Start date: ${_formatDate(_startDate)}",
+                              : "Start: ${_formatDate(_startDate)}",
                           style: const TextStyle(
                             color: Color(0xFF202D5A),
                           ),
@@ -158,7 +172,7 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
                         Text(
                           _endDate == null
                               ? "Pick End Date"
-                              : " ${_formatDate(_endDate)}",
+                              : "End: ${_formatDate(_endDate)}",
                           style: const TextStyle(
                             color: Color(0xFF202D5A),
                           ),
