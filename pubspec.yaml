@@ -12,8 +12,8 @@ dependencies:
   path: ^1.9.1
   shared_preferences: ^2.5.3
   sqflite_common_ffi: ^2.3.5
-  responsive_framework: ^1.1.1
   intl: ^0.18.1
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:

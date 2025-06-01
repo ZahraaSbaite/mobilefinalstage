@@ -1,6 +1,7 @@
 import 'package:final_project/models/skill.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddSkillScreen extends StatefulWidget {
   const AddSkillScreen({super.key});
@@ -14,6 +15,7 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
       TextEditingController();
   final TextEditingController _descriptionController =
       TextEditingController();
+
   DateTime? _startDate;
   DateTime? _endDate;
 
@@ -90,51 +92,79 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 203, 199, 193),
       appBar: AppBar(
-        title: const Text("Add New Skill"),
-        titleTextStyle: const TextStyle(
-          color: Color(0xFF202D5A),
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
+        title: Text(
+          "Add New Skill",
+          style: TextStyle(
+            color: const Color(0xFF202D5A),
+            fontWeight: FontWeight.bold,
+            fontSize: 20.sp,
+          ),
         ),
         backgroundColor: const Color.fromARGB(255, 203, 199, 193),
         iconTheme: const IconThemeData(color: Color(0xFF202D5A)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0.w),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            SizedBox(height: 8.h),
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: "Skill Name",
-                labelStyle: const TextStyle(color: Color(0xFF202D5A)),
+                labelStyle: TextStyle(
+                  color: const Color(0xFF202D5A),
+                  fontSize: 16.sp,
+                ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF202D5A),
+                  ),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF202D5A),
+                  ),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
-              style: const TextStyle(color: Color(0xFF202D5A)),
+              style: TextStyle(
+                color: const Color(0xFF202D5A),
+                fontSize: 16.sp,
+              ),
               autofocus: true,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             TextField(
               controller: _descriptionController,
               decoration: InputDecoration(
                 labelText: "Description",
-                labelStyle: const TextStyle(color: Color(0xFF202D5A)),
+                labelStyle: TextStyle(
+                  color: const Color(0xFF202D5A),
+                  fontSize: 16.sp,
+                ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF202D5A),
+                  ),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF202D5A)),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF202D5A),
+                  ),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
               maxLines: 1,
-              style: const TextStyle(color: Color(0xFF202D5A)),
+              style: TextStyle(
+                color: const Color(0xFF202D5A),
+                fontSize: 16.sp,
+              ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Row(
               children: [
                 Expanded(
@@ -142,18 +172,21 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
                     onPressed: () => _pickDate(context, true),
                     child: Column(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.date_range,
-                          color: Color(0xFF202D5A),
+                          color: const Color(0xFF202D5A),
+                          size: 24.sp,
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Text(
                           _startDate == null
                               ? "Pick Start Date"
                               : "Start: ${_formatDate(_startDate)}",
-                          style: const TextStyle(
-                            color: Color(0xFF202D5A),
+                          style: TextStyle(
+                            color: const Color(0xFF202D5A),
+                            fontSize: 14.sp,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
@@ -164,18 +197,21 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
                     onPressed: () => _pickDate(context, false),
                     child: Column(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.date_range,
-                          color: Color(0xFF202D5A),
+                          color: const Color(0xFF202D5A),
+                          size: 24.sp,
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Text(
                           _endDate == null
                               ? "Pick End Date"
                               : "End: ${_formatDate(_endDate)}",
-                          style: const TextStyle(
-                            color: Color(0xFF202D5A),
+                          style: TextStyle(
+                            color: const Color(0xFF202D5A),
+                            fontSize: 14.sp,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
@@ -183,19 +219,28 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: _submitSkill,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF202D5A),
-              ),
-              child: const Text(
-                "Save",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 203, 199, 193),
+            SizedBox(height: 24.h),
+            SizedBox(
+              width: double.infinity,
+              height: 48.h,
+              child: ElevatedButton(
+                onPressed: _submitSkill,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF202D5A),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                ),
+                child: Text(
+                  "Save",
+                  style: TextStyle(
+                    color: const Color.fromARGB(255, 203, 199, 193),
+                    fontSize: 16.sp,
+                  ),
                 ),
               ),
             ),
+            SizedBox(height: 16.h),
           ],
         ),
       ),

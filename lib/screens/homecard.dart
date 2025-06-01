@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class DetailScreen extends StatelessWidget {
   final String title;
 
@@ -8,33 +10,33 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title, style: TextStyle(fontSize: 20.sp)),
         backgroundColor: Colors.green[700],
         foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               '$title Details',
-              style: const TextStyle(
-                fontSize: 24,
+              style: TextStyle(
+                fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
+            SizedBox(height: 16.h),
+            Text(
               'This screen shows more information about the selected section. '
               'Here, you could list services, show charts, display messages, or anything relevant to the section.',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16.sp),
             ),
-            const SizedBox(height: 30),
-            const Placeholder(
-              fallbackHeight: 200,
+            SizedBox(height: 30.h),
+            Placeholder(
+              fallbackHeight: 200.h,
               color: Colors.green,
-              strokeWidth: 2,
+              strokeWidth: 2.w,
             ),
           ],
         ),

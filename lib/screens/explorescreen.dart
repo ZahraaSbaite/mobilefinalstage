@@ -7,7 +7,7 @@ import 'package:final_project/widgets/searchbar.dart';
 import 'package:final_project/widgets/searchresult.dart';
 import 'package:final_project/widgets/sortorder.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -38,7 +38,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
         }
       }
     }
+
     _courseToCategoryMap = result;
+
     final sortedCourses =
         result.keys.toList()..sort(
           (a, b) =>
@@ -46,14 +48,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ? a.title.compareTo(b.title)
                   : b.title.compareTo(a.title),
         );
+
     return sortedCourses;
   }
 
   void _openFilterSortModal() {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16.r),
+        ),
       ),
       builder: (_) {
         return FilterSortModal(
@@ -75,19 +80,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 203, 199, 193),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Explore',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF202D5A),
+                color: const Color(0xFF202D5A),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Row(
               children: [
                 Expanded(
@@ -99,11 +104,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10.w),
                 FilterButton(onPressed: _openFilterSortModal),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Expanded(
               child:
                   _searchQuery.isNotEmpty

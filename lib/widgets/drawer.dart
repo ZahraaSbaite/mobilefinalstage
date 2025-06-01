@@ -1,5 +1,6 @@
 import 'package:final_project/screens/favorites.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -11,35 +12,41 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Color(0xFF202D5A)),
+          DrawerHeader(
+            decoration: const BoxDecoration(color: Color(0xFF202D5A)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage(
+                  radius: 30.r,
+                  backgroundImage: const AssetImage(
                     'assets/images/profile.jpg',
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 Text(
                   "User Name",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.sp,
+                  ),
                 ),
               ],
             ),
           ),
           ListTile(
-            leading: const Icon(
+            leading: Icon(
               Icons.favorite_border,
-              color: Color(0xFF202D5A),
-              size: 18,
+              color: const Color(0xFF202D5A),
+              size: 18.sp,
             ),
-            title: const Text(
+            title: Text(
               "Favorites",
-              style: TextStyle(color: Color(0xFF202D5A)),
+              style: TextStyle(
+                color: const Color(0xFF202D5A),
+                fontSize: 14.sp,
+              ),
             ),
             onTap: () {
               Navigator.pop(context);

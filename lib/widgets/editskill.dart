@@ -1,5 +1,6 @@
 import 'package:final_project/models/skill.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditSkillDialog extends StatelessWidget {
   final Skill skill;
@@ -24,104 +25,126 @@ class EditSkillDialog extends StatelessWidget {
       builder: (context, setState) {
         return AlertDialog(
           backgroundColor: const Color.fromARGB(255, 203, 199, 193),
-          title: const Text(
+          title: Text(
             'Edit Skill',
             style: TextStyle(
-              color: Color(0xFF202D5A),
+              color: const Color(0xFF202D5A),
               fontWeight: FontWeight.bold,
+              fontSize: 18.sp,
             ),
           ),
-
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Skill Name',
-                  labelStyle: TextStyle(color: Color(0xFF202D5A)),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  labelText: 'Description',
-                  labelStyle: TextStyle(color: Color(0xFF202D5A)),
-                ),
-                maxLines: 1,
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Start Date",
-                    style: TextStyle(color: Color(0xFF202D5A)),
-                  ),
-
-                  TextButton(
-                    onPressed: () async {
-                      final pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: startDate,
-                        firstDate: DateTime(2020),
-                        lastDate: DateTime(2030),
-                      );
-                      if (pickedDate != null &&
-                          pickedDate != startDate) {
-                        setState(() {
-                          startDate = pickedDate;
-                          if (endDate.isBefore(startDate)) {
-                            endDate = startDate;
-                          }
-                        });
-                      }
-                    },
-                    child: Text(
-                      "${startDate.toLocal()}".split(' ')[0],
-                      style: TextStyle(color: Color(0xFF202D5A)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: 'Skill Name',
+                    labelStyle: TextStyle(
+                      color: const Color(0xFF202D5A),
+                      fontSize: 14.sp,
                     ),
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "End Date",
-                    style: TextStyle(color: Color(0xFF202D5A)),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: endDate,
-                        firstDate: startDate,
-                        lastDate: DateTime(2030),
-                      );
-                      if (pickedDate != null &&
-                          pickedDate != endDate) {
-                        setState(() {
-                          endDate = pickedDate;
-                        });
-                      }
-                    },
-                    child: Text(
-                      "${endDate.toLocal()}".split(' ')[0],
-                      style: TextStyle(color: Color(0xFF202D5A)),
+                ),
+                SizedBox(height: 12.h),
+                TextField(
+                  controller: descriptionController,
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    labelStyle: TextStyle(
+                      color: const Color(0xFF202D5A),
+                      fontSize: 14.sp,
                     ),
                   ),
-                ],
-              ),
-            ],
+                  maxLines: 1,
+                ),
+                SizedBox(height: 12.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Start Date",
+                      style: TextStyle(
+                        color: const Color(0xFF202D5A),
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        final pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: startDate,
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2030),
+                        );
+                        if (pickedDate != null &&
+                            pickedDate != startDate) {
+                          setState(() {
+                            startDate = pickedDate;
+                            if (endDate.isBefore(startDate)) {
+                              endDate = startDate;
+                            }
+                          });
+                        }
+                      },
+                      child: Text(
+                        "${startDate.toLocal()}".split(' ')[0],
+                        style: TextStyle(
+                          color: const Color(0xFF202D5A),
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "End Date",
+                      style: TextStyle(
+                        color: const Color(0xFF202D5A),
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        final pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: endDate,
+                          firstDate: startDate,
+                          lastDate: DateTime(2030),
+                        );
+                        if (pickedDate != null &&
+                            pickedDate != endDate) {
+                          setState(() {
+                            endDate = pickedDate;
+                          });
+                        }
+                      },
+                      child: Text(
+                        "${endDate.toLocal()}".split(' ')[0],
+                        style: TextStyle(
+                          color: const Color(0xFF202D5A),
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
               onPressed: Navigator.of(context).pop,
-              child: const Text(
+              child: Text(
                 'Cancel',
-                style: TextStyle(color: Color(0xFF202D5A)),
+                style: TextStyle(
+                  color: const Color(0xFF202D5A),
+                  fontSize: 14.sp,
+                ),
               ),
             ),
             ElevatedButton(
@@ -143,14 +166,13 @@ class EditSkillDialog extends StatelessWidget {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(
-                  0xFF202D5A,
-                ),
+                backgroundColor: const Color(0xFF202D5A),
               ),
-              child: const Text(
+              child: Text(
                 'Save',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 203, 199, 193),
+                  color: const Color.fromARGB(255, 203, 199, 193),
+                  fontSize: 14.sp,
                 ),
               ),
             ),

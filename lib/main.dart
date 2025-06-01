@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:final_project/screens/explorescreen.dart';
 import 'package:final_project/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
@@ -18,10 +19,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Skill Exchange',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: const AppNavigator(),
+    return ScreenUtilInit(
+      designSize: const Size(
+        375,
+        812,
+      ), // base size of your Figma/Design
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Skill Exchange',
+          theme: ThemeData(primarySwatch: Colors.green),
+          home: const AppNavigator(),
+        );
+      },
     );
   }
 }
@@ -36,10 +47,7 @@ class AppNavigator extends StatefulWidget {
 class _AppNavigatorState extends State<AppNavigator> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomeScreen(),
-    ExploreScreen(),
-  ];
+  final List<Widget> _pages = const [HomeScreen(), ExploreScreen()];
 
   void _onItemTapped(int index) {
     setState(() {

@@ -6,6 +6,7 @@ import 'package:final_project/widgets/editskill.dart';
 import 'package:final_project/widgets/favoritebottom.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SkillDetailsScreen extends StatefulWidget {
   final Course course;
@@ -87,9 +88,7 @@ class _SkillDetailsScreenState extends State<SkillDetailsScreen> {
   }
 
   String _formatDateRange(Skill skill) {
-    final formatter = DateFormat(
-      'MMM dd, yyyy',
-    );
+    final formatter = DateFormat('MMM dd, yyyy');
     String start = formatter.format(skill.startDate.toLocal());
     String end = formatter.format(skill.endDate.toLocal());
     return "$start - $end";
@@ -101,15 +100,18 @@ class _SkillDetailsScreenState extends State<SkillDetailsScreen> {
       backgroundColor: const Color.fromARGB(255, 203, 199, 193),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 203, 199, 193),
-        title: Text("${widget.course.title} Skills"),
-        titleTextStyle: const TextStyle(
-          color: Color(0xFF202D5A),
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+        title: Text(
+          "${widget.course.title} Skills",
+          style: TextStyle(
+            color: const Color(0xFF202D5A),
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        iconTheme: const IconThemeData(color: Color(0xFF202D5A)),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -118,95 +120,132 @@ class _SkillDetailsScreenState extends State<SkillDetailsScreen> {
               children: [
                 Text(
                   'Course Code: ${widget.course.code}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey[700],
                   ),
                 ),
                 FavoriteButton(courseCode: widget.course.code),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 10.h),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
                 color: const Color(0xFF202D5A),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12.r),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Brief description:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 221, 221, 219),
-                      fontSize: 24,
+                      color: const Color.fromARGB(255, 221, 221, 219),
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     widget.course.description,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white70,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
+            SizedBox(height: 24.h),
+            Text(
               'Related Skills:',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF202D5A),
+                color: const Color(0xFF202D5A),
               ),
             ),
-            const Divider(),
+            SizedBox(height: 6.h),
+            Divider(thickness: 1.h, color: Colors.grey[400]),
             Expanded(
               child:
                   skills.isEmpty
-                      ? const Center(
+                      ? Center(
                         child: Text(
                           'No skills added yet.',
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.sp,
+                          ),
                         ),
                       )
-                      : ListView.builder(
+                      : ListView.separated(
                         itemCount: skills.length,
+                        separatorBuilder:
+                            (context, index) => SizedBox(height: 8.h),
                         itemBuilder: (context, index) {
                           final skill = skills[index];
-                          return ListTile(
-                            title: Text(skill.name),
-                            subtitle: Text(
-                              "${_formatDateRange(skill)}\n${skill.description}",
-                              style: const TextStyle(fontSize: 12),
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10.h,
+                              horizontal: 12.w,
                             ),
-                            isThreeLine: true,
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    size: 18,
-                                  ),
-                                  onPressed:
-                                      () =>
-                                          _showEditSkillDialog(index),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    size: 18,
-                                  ),
-                                  onPressed:
-                                      () => _deleteSkill(index),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(
+                                10.r,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  blurRadius: 6.r,
+                                  offset: Offset(0, 3.h),
                                 ),
                               ],
+                            ),
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(
+                                skill.name,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF202D5A),
+                                ),
+                              ),
+                              subtitle: Padding(
+                                padding: EdgeInsets.only(top: 4.h),
+                                child: Text(
+                                  "${_formatDateRange(skill)}\n${skill.description}",
+                                  style: TextStyle(fontSize: 12.sp),
+                                ),
+                              ),
+                              isThreeLine: true,
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.edit,
+                                      size: 18.sp,
+                                    ),
+                                    onPressed:
+                                        () => _showEditSkillDialog(
+                                          index,
+                                        ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      size: 18.sp,
+                                    ),
+                                    onPressed:
+                                        () => _deleteSkill(index),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

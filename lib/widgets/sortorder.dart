@@ -1,5 +1,6 @@
 import 'package:final_project/models/sort.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FilterButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -10,13 +11,13 @@ class FilterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 203, 199, 193),
-        borderRadius: BorderRadius.circular(20),
+        color: const Color.fromARGB(255, 203, 199, 193),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       child: IconButton(
-        icon: const Icon(Icons.filter_list, color: Color(0xFF202D5A)),
+        icon: Icon(Icons.filter_list, color: const Color(0xFF202D5A)),
         onPressed: onPressed,
-        iconSize: 35,
+        iconSize: 35.sp,
       ),
     );
   }
@@ -48,41 +49,47 @@ class _FilterSortModalState extends State<FilterSortModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 203, 199, 193),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 203, 199, 193),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16.r),
+        ),
       ),
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'Filter & Sort',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF202D5A), 
+              color: const Color(0xFF202D5A),
             ),
           ),
-          const SizedBox(height: 16),
-          const Align(
+          SizedBox(height: 16.h),
+          Align(
             alignment: Alignment.centerLeft,
             child: Text(
               'Sort by Title',
               style: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF202D5A), 
+                color: const Color(0xFF202D5A),
               ),
             ),
           ),
           RadioListTile<SortOrder>(
-            title: const Text(
+            title: Text(
               'Ascending',
-              style: TextStyle(color: Color(0xFF202D5A)),
+              style: TextStyle(
+                color: const Color(0xFF202D5A),
+                fontSize: 14.sp,
+              ),
             ),
             value: SortOrder.ascending,
             groupValue: _selectedSortOrder,
-            activeColor: Color(0xFF202D5A),
+            activeColor: const Color(0xFF202D5A),
             onChanged: (value) {
               if (value != null) {
                 setState(() {
@@ -92,13 +99,16 @@ class _FilterSortModalState extends State<FilterSortModal> {
             },
           ),
           RadioListTile<SortOrder>(
-            title: const Text(
+            title: Text(
               'Descending',
-              style: TextStyle(color: Color(0xFF202D5A)),
+              style: TextStyle(
+                color: const Color(0xFF202D5A),
+                fontSize: 14.sp,
+              ),
             ),
             value: SortOrder.descending,
             groupValue: _selectedSortOrder,
-            activeColor: Color(0xFF202D5A),
+            activeColor: const Color(0xFF202D5A),
             onChanged: (value) {
               if (value != null) {
                 setState(() {
@@ -107,19 +117,26 @@ class _FilterSortModalState extends State<FilterSortModal> {
               }
             },
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(
-                0xFF202D5A,
-              ), // Button color
-              foregroundColor: Color.fromARGB(255, 203, 199, 193), 
+              backgroundColor: const Color(0xFF202D5A),
+              foregroundColor: const Color.fromARGB(
+                255,
+                203,
+                199,
+                193,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: 24.w,
+                vertical: 12.h,
+              ),
             ),
             onPressed: () {
               Navigator.pop(context);
               widget.onApply(_selectedSortOrder);
             },
-            child: const Text('Apply'),
+            child: Text('Apply', style: TextStyle(fontSize: 16.sp)),
           ),
         ],
       ),

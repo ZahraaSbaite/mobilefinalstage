@@ -2,6 +2,7 @@ import 'package:final_project/models/category.dart';
 import 'package:final_project/models/course.dart';
 import 'package:final_project/screens/skilldetails.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchResult extends StatelessWidget {
   final List<Course> courses;
@@ -18,17 +19,17 @@ class SearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.w),
       children: [
         if (courses.isNotEmpty)
-          const Padding(
-            padding: EdgeInsets.only(bottom: 8.0),
+          Padding(
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Text(
               'Search Results:',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF202D5A),
+                color: const Color(0xFF202D5A),
               ),
             ),
           ),
@@ -44,26 +45,34 @@ class SearchResult extends StatelessWidget {
                 ),
               );
             },
-            leading: const Icon(Icons.book, color: Color(0xFF202D5A)),
+            leading: Icon(
+              Icons.book,
+              color: const Color(0xFF202D5A),
+              size: 24.w,
+            ),
             title: Text(
               course.title,
-              style: const TextStyle(color: Color(0xFF202D5A)),
+              style: TextStyle(
+                color: const Color(0xFF202D5A),
+                fontSize: 16.sp,
+              ),
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   course.code,
-                  style: const TextStyle(
-                    color: Color(0xFF202D5A),
+                  style: TextStyle(
+                    color: const Color(0xFF202D5A),
+                    fontSize: 14.sp,
                   ),
                 ),
-
                 if (category != null)
                   Text(
                     'Category: ${category.name}',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 152, 152, 155),
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 152, 152, 155),
+                      fontSize: 13.sp,
                     ),
                   ),
               ],
@@ -71,20 +80,20 @@ class SearchResult extends StatelessWidget {
           );
         }),
         if (hasSearched && courses.isEmpty)
-          const Center(
+          Center(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.w),
               child: Text(
                 'Course not found',
                 style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFF202D5A),
+                  fontSize: 18.sp,
+                  color: const Color(0xFF202D5A),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
-        if (courses.isNotEmpty) const Divider(),
+        if (courses.isNotEmpty) Divider(height: 16.h, thickness: 1),
       ],
     );
   }

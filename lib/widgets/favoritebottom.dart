@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavoriteButton extends StatefulWidget {
   final String courseCode;
@@ -46,9 +47,13 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      iconSize: 24.w, // Responsive size
       icon: Icon(
         isFavorite ? Icons.star : Icons.star_border,
-        color: isFavorite ? const Color.fromARGB(255, 96, 76, 14) : const Color(0xFF202D5A),
+        color:
+            isFavorite
+                ? const Color.fromARGB(255, 96, 76, 14)
+                : const Color(0xFF202D5A),
       ),
       onPressed: _toggleFavorite,
     );

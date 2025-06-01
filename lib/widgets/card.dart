@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class StatCard extends StatelessWidget {
   final String title;
   final int count;
@@ -25,34 +27,38 @@ class StatCard extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: Color(0xFF202D5A),
-          borderRadius: BorderRadius.circular(16),
+          color: const Color(0xFF202D5A),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: Color.fromARGB(255, 203, 199, 193), size: 26),
-            const SizedBox(height: 6),
+            Icon(
+              icon,
+              color: const Color.fromARGB(255, 203, 199, 193),
+              size: 26.sp,
+            ),
+            SizedBox(height: 6.h),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color.fromARGB(255, 203, 199, 193),
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: const Color.fromARGB(255, 203, 199, 193),
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
             Text(
               '$count',
-              style: const TextStyle(
-                fontSize: 20,
+              style: TextStyle(
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 203, 199, 193),
+                color: const Color.fromARGB(255, 203, 199, 193),
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
           ],
         ),
       ),
